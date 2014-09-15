@@ -114,12 +114,12 @@ def draw():
   # draw four squares around the first square, four squares around
   # each of those squares, and on and on...
   drawFourSquares(256, 256, origin, count)
-  # origin square length increases by 1% with each iteration of
-  # the draw loop if mouse on the right side, descreases by 1%
-  # if mouse on the left side
+  # origin square width increases by up to 10% with each frame
+  # when mouse is on the right side of the image, and decreases
+  # by up to 10% with each frame when mouse is on the left side
   if mouseX > (256*1.5):
-    origin *= 1.01
+    origin *= 1 + (0.1)*((mouseX-256*1.5)/(256*1.5))
   elif mouseX < (256*1.5):
-    origin *= 0.99
+    origin *= 1 - (0.1)*(abs(mouseX-256*1.5)/(256*1.5))
   else:
     pass
