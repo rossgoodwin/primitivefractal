@@ -72,7 +72,7 @@ def drawFourSquares(x, y, l, count):
   # also, if (x, y) coordinates of upper left corner of
   # origin square is outside a certain range, do not continue
   # adding squares to it
-  if l > 7 and x >= -1*(origin/2) and y >= -1*(origin/2) and x <= (origin*3.5) and y <= (origin*3.5):
+  if l > (origin/64 - 1) and x >= -1*(origin/2) and y >= -1*(origin/2) and x <= (origin*3.5) and y <= (origin*3.5):
     # draw four squares for the top square
     drawFourSquares(sTop[0], sTop[1], l, count)
     # draw four squares for the bottom square
@@ -93,7 +93,6 @@ def setup():
   # saturation, brightness, and opacity
   colorMode(HSB, 100, 100, 100, 100)
   # don't loop the draw loop by default
-  noLoop()
 
 def draw():
   # make a variable "count" that loops from 1 to the number of
@@ -116,13 +115,11 @@ def draw():
   # each of those squares, and on and on...
   drawFourSquares(256, 256, origin, count)
   # origin square length increases by 1% with each iteration of
-  # the draw loop
-  origin *= 1.01
-
-# when mouse is pressed, loop the draw loop
-def mousePressed():
-  loop()
-
-# when mouse is released, stop looping
-def mouseReleased():
-  noLoop()
+  # the draw loop if mouse on the right side, descreases by 1%
+  # if mouse on the left side
+  if mouseX > (256*1.5):
+    origin *= 1.01
+  elif mouseX < (256*1.5):
+    origin *= 0.99
+  else:
+    pass
