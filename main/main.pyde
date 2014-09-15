@@ -92,7 +92,6 @@ def setup():
   # set color mode to RGB with value ranges of 0-100 for hue,
   # saturation, brightness, and opacity
   colorMode(HSB, 100, 100, 100, 100)
-  # don't loop the draw loop by default
 
 def draw():
   # make a variable "count" that loops from 1 to the number of
@@ -117,9 +116,21 @@ def draw():
   # origin square width increases by up to 10% with each frame
   # when mouse is on the right side of the image, and decreases
   # by up to 10% with each frame when mouse is on the left side
-  if mouseX > (256*1.5):
+  # NEW AND IMPROVED with mouseclick to switch zoom on and off
+  if mouseX > (256*1.5) and mouseclick:
     origin *= 1 + (0.1)*((mouseX-256*1.5)/(256*1.5))
-  elif mouseX < (256*1.5):
+  elif mouseX < (256*1.5) and mouseclick:
     origin *= 1 - (0.1)*(abs(mouseX-256*1.5)/(256*1.5))
   else:
     pass
+
+# set mouseclick variable to false
+mouseclick = False
+
+# standard switch function
+def mouseClicked():
+  if mouseclick:
+    mouseclick = False
+  else:
+    mouseclick = True
+    
