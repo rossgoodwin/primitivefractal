@@ -1,3 +1,6 @@
+mouseclick = False
+origin = 256
+
 def drawSquareTop(a, b, ll, n):
   # draws square on top of origin square and returns coordinates
   # of the new square it drew
@@ -82,9 +85,6 @@ def drawFourSquares(x, y, l, count):
     # draw four squares for the left square
     drawFourSquares(sLeft[0], sLeft[1], l, count)
 
-# set first origin square at initial value of 256
-origin = 256
-
 def setup():
   # set size to 3 x origin square (this allows to whole 
   # initial shape to remain visible)
@@ -94,6 +94,7 @@ def setup():
   colorMode(HSB, 100, 100, 100, 100)
 
 def draw():
+  global origin
   # make a variable "count" that loops from 1 to the number of
   # levels in the fractal (using frameCount)
   count = frameCount % (log(origin)/log(2))
@@ -123,14 +124,9 @@ def draw():
     origin *= 1 - (0.1)*(abs(mouseX-256*1.5)/(256*1.5))
   else:
     pass
-
-# set mouseclick variable to false
-mouseclick = False
-
+    
 # standard switch function
 def mouseClicked():
-  if mouseclick:
-    mouseclick = False
-  else:
-    mouseclick = True
+  global mouseclick
+  mouseclick = not mouseclick
     
